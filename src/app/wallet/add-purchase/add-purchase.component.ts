@@ -46,7 +46,9 @@ export class AddPurchaseComponent implements OnInit {
     let result = '';
 
     for (const key in control.errors) {
-      result += message[key] + ' ';
+      if (control.errors.hasOwnProperty(key)) {
+        result += message[key] + ' ';
+      }
     }
     return result;
   }
