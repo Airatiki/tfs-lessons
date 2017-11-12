@@ -12,19 +12,19 @@ export class AddPurchaseComponent implements OnInit {
   @Output() addPurchase = new EventEmitter<Purchase>();
 
   validationMessages = {
-    'title': {
-      'required': 'поле обязательно для заполнения',
-      'minlength': 'минимальная длина — 3',
-      'maxlength': 'максимальная длина — 80'
+    title: {
+      required: 'поле обязательно для заполнения',
+      minlength: 'минимальная длина — 3',
+      maxlength: 'максимальная длина — 80'
     },
-    'price': {
-      'required': 'поле обязательно для заполнения',
-      'pattern': 'разрешены лишь цифры',
-      'min': 'минимальное значение 10',
-      'max': 'максимальное значение 1000000'
+    price: {
+      required: 'поле обязательно для заполнения',
+      pattern: 'разрешены лишь цифры',
+      min: 'минимальное значение 10',
+      max: 'максимальное значение 1000000'
     },
-    'date': {
-      'pattern': 'неверный формат даты'
+    date: {
+      pattern: 'неверный формат даты'
     }
   };
 
@@ -66,7 +66,7 @@ export class AddPurchaseComponent implements OnInit {
       date: this.form.value.date === '' ? new Date() : new Date(this.form.value.date)
     };
 
-    if (this.form.value.comment !== '') {
+    if (this.form.value.comment) {
       purchase.comment = this.form.value.comment;
     }
     this.addPurchase.emit(purchase);

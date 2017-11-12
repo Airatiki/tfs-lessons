@@ -6,9 +6,7 @@
            class="form-control"
            automation-id="title-control"
            placeholder="Название" required>
-    <div automation-id="title-error" class="invalid-feedback" *ngIf="form.get('title').invalid">
-      <div class="alert alert-danger">{{getErrorMessage('title')}}</div>
-    </div>
+    <div automation-id="title-error" class="invalid-feedback">{{getErrorMessage('title')}}</div>
   </div>
 
   <div class="form-group">
@@ -17,26 +15,25 @@
            class="form-control"
            automation-id="price-control"
            placeholder="Стоимость">
-    <div automation-id="price-error" class="invalid-feedback" *ngIf="form.get('price').invalid">
-      <div class="alert alert-danger">{{getErrorMessage('price')}}</div>
-    </div>
+    <div automation-id="price-error" class="invalid-feedback">{{getErrorMessage('price')}}</div>
   </div>
 
   <div class="form-group">
     <input formControlName="date"
            type="text"
            class="form-control"
+           automation-id="date-control"
            placeholder="Дата">
-    <div class="invalid-feedback" *ngIf="form.get('date').invalid">
-      <div class="alert alert-danger">{{getErrorMessage('date')}}</div>
-    </div>
+    <div automation-id="date-error" class="invalid-feedback">{{getErrorMessage('date')}}</div>
   </div>
 
   <div class="form-group">
-    <input formControlName="comment"
-           type="text"
-           class="form-control"
-           placeholder="Comment">
+    <textarea formControlName="comment"
+              type="text"
+              class="form-control"
+              automation-id="comment-control"
+              placeholder="Comment">
+    </textarea>
   </div>
 
   <div class="form-group">
