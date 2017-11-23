@@ -2,7 +2,7 @@ import {Purchase} from './purchase';
 
 export function getPurchaseMock(): Purchase {
   return {
-    // id: '',
+    id: '',
     title: '',
     price: 0,
     date: '',
