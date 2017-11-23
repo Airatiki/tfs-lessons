@@ -51,7 +51,12 @@ export class WalletHttpService {
     );
   }
 
-  updatePurchase(x: any) {
-    return Observable.of();
+  updatePurchase(updPurchase: Purchase): Observable<any> {
+    const id = updPurchase.id;
+    if (!id) {
+      return Observable.of(null);
+    }
+    delete updPurchase['id'];
+    return this.http.put(`${BASE_URL}/purchases/${id}.json`, updPurchase);
   }
 }

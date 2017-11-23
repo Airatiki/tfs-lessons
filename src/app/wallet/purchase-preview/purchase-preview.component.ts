@@ -12,7 +12,7 @@ export class PurchasePreviewComponent implements OnInit, OnChanges {
   @Output() previewClick = new EventEmitter();
   @Output() previewDelete = new EventEmitter();
   @Output() edit = new EventEmitter<Purchase>();
-  isEdit;
+  isEdit = false;
 
   constructor() {
   }
@@ -20,8 +20,14 @@ export class PurchasePreviewComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges() {
-    
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty('isOpen')) {
+      this.isOpen = changes['isOpen'].currentValue;
+
+      if (!this.isOpen) {
+        this.onCancelEdit();
+      }
+    }
   }
 
   onClick() {
@@ -34,9 +40,18 @@ export class PurchasePreviewComponent implements OnInit, OnChanges {
     this.previewDelete.emit();
   }
 
-  onEditPurchase() {
+  onEditPurchase(purch: Purchase) {
+    if (this.purchase.id) {
+      purch.id = this.purchase.id;
+    }
+    this.edit.emit(purch);
   }
 
-  toggleEdit() {
+  onCancelEdit() {
+    this.isEdit = false;
+  }
+
+  onEditClick() {
+    this.isEdit = true;
   }
 }
