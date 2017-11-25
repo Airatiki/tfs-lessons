@@ -4,8 +4,7 @@
            type="text"
            class="form-control"
            automation-id="title-control"
-           placeholder="Название"
-           value="{{_purchase.title}}">
+           placeholder="Название">
     <div class="invalid-feedback" automation-id="title-error">
       {{form.get('title').errors && getErrors(form.get('title').errors)}}
     </div>
@@ -15,8 +14,7 @@
            type="text"
            class="form-control"
            automation-id="price-control"
-           placeholder="Стоимость"
-           value="{{_purchase.price}}">
+           placeholder="Стоимость">
     <div class="invalid-feedback" automation-id="price-error">
       {{form.get('price').errors && getErrors(form.get('price').errors)}}
     </div>
@@ -26,14 +24,13 @@
            type="date"
            class="form-control"
            automation-id="date-control"
-           placeholder="Дата"
-           value="{{_purchase.date}}">
+           placeholder="Дата">
   </div>
   <div class="form-group">
     <textarea formControlName="comment"
               class="form-control"
-              automation-id="comment-control"
-              value="{{_purchase.comment}}"></textarea>
+              automation-id="comment-control">
+    </textarea>
   </div>
   <div class="form-group">
     <button type="submit"
