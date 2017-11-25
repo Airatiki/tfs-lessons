@@ -24,6 +24,7 @@
                             [purchase]="purchase"
                             [isOpen]="isCurrentOpen(i)"
                             (previewClick)="onPreviewClick(i)"
+                            (edit)="onPurchaseEdit($event)"
                             (previewDelete)="onPreviewDelete(purchase)"></tfs-purchase-preview>
     </li>
   </ul>

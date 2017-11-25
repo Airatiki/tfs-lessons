@@ -5,6 +5,7 @@
   <span class="badge badge-secondary" automation-id="price">{{purchase.price | currency:'RUB':''}}</span>
   <span class="badge badge-danger delete-btn" (click)="onDeleteClick($event)">&times;</span>
 </div>
+
 <div class="preview-body" *ngIf="isOpen && !isEdit" automation-id="preview-body">
   <table class="details">
     <tr>
@@ -18,6 +19,50 @@
   </table>
   <button automation-id="begin-edit-btn" class="btn btn-warning btn-block" (click)="onEditClick()">Редактировать</button>
 </div>
-<div automation-id="edit-purchase-form" *ngIf="isEdit && isOpen" class="preview-body">
-  <button automation-id="cancel-edit-btn" class="btn btn-danger btn-block" (click)="onCancelEdit()">Отмена</button>
+
+<div class="preview-body" automation-id="edit-purchase-form" *ngIf="isEdit && isOpen" >
+<form [formGroup]="editForm" (submit)="onSubmit()">
+  <div class="form-group">
+    <input formControlName="title"
+           type="text"
+           class="form-control"
+           placeholder="Название">
+    <div class="invalid-feedback">
+      {{editForm.get('title').errors && getErrors(editForm.get('title').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="price"
+           type="text"
+           class="form-control"
+           placeholder="Стоимость">
+    <div class="invalid-feedback">
+      {{editForm.get('price').errors && getErrors(editForm.get('price').errors)}}
+    </div>
+  </div>
+  <div class="form-group">
+    <input formControlName="date"
+           type="date"
+           class="form-control"
+           placeholder="Дата">
+  </div>
+  <div class="form-group">
+    <textarea formControlName="comment"
+              class="form-control">
+    </textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit"
+            [disabled]="editForm.pristine || editForm.invalid"
+            class="btn btn-success btn-block">Готово
+    </button>
+  </div>
+  <div class="form-group">
+    <button type=button
+            automation-id="cancel-edit-btn"
+            class="btn btn-danger btn-block"
+            (click)="onCancelEdit()">Отмена
+    </button>
+  </div>
+</form>
 </div>

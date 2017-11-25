@@ -56,7 +56,7 @@ export class WalletHttpService {
     if (!id) {
       return Observable.of(null);
     }
-    delete updPurchase['id'];
+    delete updPurchase.id;
     return this.http.put(`${BASE_URL}/purchases/${id}.json`, updPurchase);
   }
 }
