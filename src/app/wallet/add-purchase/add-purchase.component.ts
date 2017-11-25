@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Purchase} from '../../model/purchase';
-
-const digitRegex = /^\d*\.?\d+$/;
+import {errorMessage, digitRegex} from '../../model/validators';
 
 @Component({
   selector: 'tfs-add-purchase',
@@ -34,29 +33,7 @@ export class AddPurchaseComponent implements OnInit {
   }
 
   getErrors(errors: any): string {
-    if (errors['required']) {
-      return 'поле обязательно для заполнения';
-    }
-
-    if (errors['min']) {
-      return `минимальное значение ${errors['min']['min']}`;
-    }
-
-    if (errors['max']) {
-      return `максимальное значение ${errors['max']['max']}`;
-    }
-
-    if (errors['minlength']) {
-      return `минимальная длина — ${errors['minlength']['requiredLength']}`;
-    }
-
-    if (errors['maxlength']) {
-      return `максимальная длина — ${errors['maxlength']['requiredLength']}`;
-    }
-
-    if (errors['pattern'] && errors['pattern']['requiredPattern'] === digitRegex.toString()) {
-      return `разрешены лишь цифры`;
-    }
+    return errorMessage(errors);
   }
 
   ngOnInit() {

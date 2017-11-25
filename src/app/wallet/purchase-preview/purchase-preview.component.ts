@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Purchase} from '../../model/purchase';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'tfs-purchase-preview',
