@@ -5,7 +5,7 @@ import {DebugElement, SimpleChange} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AddPurchaseModule} from '../add-purchase/add-purchase.module';
 import {Purchase} from '../../model/purchase';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('PurchasePreviewComponent | компонент превьюшки покупки', () => {
   class Page extends PageObject<PurchasePreviewComponent> {
