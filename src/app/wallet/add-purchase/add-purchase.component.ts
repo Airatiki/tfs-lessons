@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Purchase} from '../../model/purchase';
-
-const digitRegex = /^\d*\.?\d+$/;
+import {errorMessage, digitRegex} from '../../model/validators';
 
 @Component({
   selector: 'tfs-add-purchase',
@@ -11,36 +10,30 @@ const digitRegex = /^\d*\.?\d+$/;
 })
 export class AddPurchaseComponent implements OnInit {
   form: FormGroup;
+  private _purchase: Purchase;
   @Output() addPurchase = new EventEmitter<Purchase>();
-  @Input() purchase: Purchase;
+  @Input() set purchase(value: Purchase) {
+    const date = value.date
+      ? new Date(value.date)
+      : new Date();
+    this.form.setValue({
+      title: value.title,
+      price: value.price,
+      date: date.toISOString().substr(0, 10),
+      comment: value.comment
+    });
+
+    this._purchase = this.form.value;
+  }
+  get purchase(): Purchase {
+    return this._purchase;
+  }
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   getErrors(errors: any): string {
-    if (errors['required']) {
-      return 'поле обязательно для заполнения';
-    }
-
-    if (errors['min']) {
-      return `минимальное значение ${errors['min']['min']}`;
-    }
-
-    if (errors['max']) {
-      return `максимальное значение ${errors['max']['max']}`;
-    }
-
-    if (errors['minlength']) {
-      return `минимальная длина — ${errors['minlength']['requiredLength']}`;
-    }
-
-    if (errors['maxlength']) {
-      return `максимальная длина — ${errors['maxlength']['requiredLength']}`;
-    }
-
-    if (errors['pattern'] && errors['pattern']['requiredPattern'] === digitRegex.toString()) {
-      return `разрешены лишь цифры`;
-    }
+    return errorMessage(errors);
   }
 
   ngOnInit() {

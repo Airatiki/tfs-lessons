@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+.invalid-feedback{
+  /* http://getbootstrap.com/docs/4.0/components/forms/#server-side подскажет, что делать*/
+  display: none;
+}
+
+.form-control.ng-invalid.ng-touched ~ .invalid-feedback {
+  display: block;
+}
